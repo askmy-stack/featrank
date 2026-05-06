@@ -20,7 +20,7 @@ def save_report(job_id: str, ranked: list) -> None:
 @router.get("/{job_id}")
 async def report(
     job_id: str,
-    format: str = Query(default="markdown", regex="^(markdown|json|slack)$"),
+    format: str = Query(default="markdown", pattern="^(markdown|json|slack)$"),
 ) -> PlainTextResponse:
     data = _report_store.get(job_id)
     if data is None:
