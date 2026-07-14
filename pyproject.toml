@@ -65,6 +65,7 @@ packages = ["featrank"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+extend-exclude = ["notebooks"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

@@ -8,7 +8,6 @@ from typing import Optional
 from loguru import logger
 from pydantic import BaseModel
 
-from featrank.config import settings
 from featrank.llm._client import get_llm_client
 
 _EXTRACTION_SYSTEM = (

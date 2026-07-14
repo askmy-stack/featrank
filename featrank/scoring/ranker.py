@@ -67,7 +67,7 @@ class CompositeRanker:
                     score_github_signal=round(gh_scores[i], 4),
                     score_roadmap_fit=round(road_scores[i], 4),
                     priority_score=round(composite, 2),
-                    priority_rank=0,
+                    priority_rank=1,
                 )
             )
 

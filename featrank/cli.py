@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 from typing import Optional
 
 import typer
 from loguru import logger
 from rich.console import Console
-from rich.table import Table
 
 app = typer.Typer(
     name="featrank",
@@ -196,7 +194,6 @@ def run(
         clusters_path = tmp / "clusters.json"
         ranked_path = tmp / "ranked.json"
 
-        ctx = typer.Context(run)
         ingest.callback(source=source, file=file, output=raw_path)  # type: ignore[arg-type]
         cluster.callback(input=raw_path, output=clusters_path)  # type: ignore[arg-type]
         rank.callback(clusters=clusters_path, roadmap=roadmap, crm=crm, output=ranked_path)  # type: ignore[arg-type]
