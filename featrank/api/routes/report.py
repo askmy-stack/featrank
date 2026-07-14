@@ -5,8 +5,6 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import PlainTextResponse
 
-from featrank.api.routes.ingest import get_job
-from featrank.schemas import RawRequest
 
 router = APIRouter()
 

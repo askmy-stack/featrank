@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
 
 from featrank.pipeline.cleaner import TextCleaner
 from featrank.schemas import RawRequest

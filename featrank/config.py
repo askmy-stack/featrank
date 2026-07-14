@@ -50,7 +50,10 @@ class Settings(BaseSettings):
     # HDBSCAN
     hdbscan_min_cluster_size: int = 5
     hdbscan_min_samples: int = 3
-    hdbscan_metric: str = "cosine"
+    # Embeddings are L2-normalized (see Embedder), so euclidean distance is
+    # monotonically equivalent to cosine distance here — and unlike "cosine",
+    # "euclidean" is supported by scikit-learn's BallTree/KDTree backends.
+    hdbscan_metric: str = "euclidean"
     hdbscan_cluster_selection_epsilon: float = 0.3
 
     @model_validator(mode="after")

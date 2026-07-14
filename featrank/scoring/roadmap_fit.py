@@ -33,8 +33,8 @@ class RoadmapFitScorer:
         return self._model
 
     def _parse_roadmap(self, roadmap_text: str) -> list[str]:
-        lines = [l.strip().lstrip("-*•").strip() for l in roadmap_text.splitlines()]
-        return [l for l in lines if len(l) > 3]
+        lines = [line.strip().lstrip("-*•").strip() for line in roadmap_text.splitlines()]
+        return [line for line in lines if len(line) > 3]
 
     def score(
         self,
