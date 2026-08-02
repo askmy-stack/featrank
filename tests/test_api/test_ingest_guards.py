@@ -20,7 +20,9 @@ def _make_app() -> FastAPI:
     async def ingest_body_size_guard(request, call_next):  # type: ignore[no-untyped-def]
         import os
 
-        max_bytes = int(os.environ.get("FEATRANK_MAX_INGEST_BODY_BYTES", str(MAX_INGEST_BODY_BYTES)))
+        max_bytes = int(
+            os.environ.get("FEATRANK_MAX_INGEST_BODY_BYTES", str(MAX_INGEST_BODY_BYTES))
+        )
         if request.url.path.rstrip("/") == "/ingest" and request.method == "POST":
             content_length = request.headers.get("content-length")
             if content_length is not None:

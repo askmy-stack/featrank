@@ -9,7 +9,7 @@ from slowapi.util import get_remote_address
 
 
 def ingest_rate_limit(*_args, **_kwargs) -> str:
-    return (os.environ.get("FEATRANK_RATE_LIMIT_INGEST", "30/minute").strip() or "30/minute")
+    return os.environ.get("FEATRANK_RATE_LIMIT_INGEST", "30/minute").strip() or "30/minute"
 
 
 limiter = Limiter(key_func=get_remote_address, headers_enabled=True)

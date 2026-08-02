@@ -10,7 +10,7 @@ from slowapi.errors import RateLimitExceeded
 
 from featrank import __version__
 from featrank.api.rate_limit import MAX_INGEST_BODY_BYTES, limiter
-from featrank.api.routes import ingest, cluster, rank, report, health
+from featrank.api.routes import cluster, health, ingest, rank, report
 
 app = FastAPI(
     title="featrank API",
@@ -37,7 +37,9 @@ async def ingest_body_size_guard(request: Request, call_next):  # type: ignore[n
     if request.url.path.rstrip("/") == "/ingest" and request.method == "POST":
         import os
 
-        max_bytes = int(os.environ.get("FEATRANK_MAX_INGEST_BODY_BYTES", str(MAX_INGEST_BODY_BYTES)))
+        max_bytes = int(
+            os.environ.get("FEATRANK_MAX_INGEST_BODY_BYTES", str(MAX_INGEST_BODY_BYTES))
+        )
         content_length = request.headers.get("content-length")
         if content_length is not None:
             try:
@@ -47,11 +49,7 @@ async def ingest_body_size_guard(request: Request, call_next):  # type: ignore[n
             if length > max_bytes:
                 return JSONResponse(
                     status_code=413,
-                    content={
-                        "detail": (
-                            f"Request body exceeds maximum of {max_bytes} bytes"
-                        )
-                    },
+                    content={"detail": (f"Request body exceeds maximum of {max_bytes} bytes")},
                 )
     return await call_next(request)
 
