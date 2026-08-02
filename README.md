@@ -93,11 +93,21 @@ docker-compose up
 ```
 
 ```bash
-# Ingest
+# Ingest (rate limited; max 1000 requests / 1 MB body by default)
 curl -X POST localhost:8000/ingest \
   -H "Content-Type: application/json" \
   -d '{"requests": [{"id":"1","text":"dark mode please","source":"intercom"}]}'
+```
 
+Ingest guards (override via env):
+
+| Env | Default | Purpose |
+|---|---|---|
+| `FEATRANK_RATE_LIMIT_INGEST` | `30/minute` | Per-IP slowapi limit on `POST /ingest` |
+| `FEATRANK_MAX_INGEST_REQUESTS` | `1000` | Max items in `requests` array |
+| `FEATRANK_MAX_INGEST_BODY_BYTES` | `1000000` | Max JSON body size (413 if exceeded) |
+
+```bash
 # Cluster
 curl -X POST localhost:8000/cluster \
   -d '{"job_id": "<job_id from above>"}'
